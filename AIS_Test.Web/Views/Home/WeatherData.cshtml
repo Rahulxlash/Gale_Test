@@ -1,0 +1,66 @@
+﻿@{
+    ViewBag.Title = "WeatherData";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Weather Data</h2>
+
+
+<div data-ng-controller="weatherController" class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <strong class="error">{{ error }}</strong>
+        </div>
+    </div>
+    <form name="weatherForm" style="width:800px;margin:0px auto;">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-6 form-group">
+                    <label for="cname" class="col-md-6 control-label"><strong>State</strong></label>
+                    <select name="sometext" size="5" ng-click="loadCities()" class="form-control col-md-6" ng-model="weather.stateId" ng-options="item.Id as item.Name for item in states" required></select>
+                </div>
+                <div class="col-md-6 form-group">
+                    <label for="cname" class="col-md-6 control-label"><strong>City</strong></label>
+                    <select name="sometext" size="5" class="form-control col-md-6" ng-click="loadCity()" ng-model="weather.cityId" ng-options="item.Id as item.Name for item in cities" required></select>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-6 form-group">
+                    <label for="cname" class="col-md-6 control-label"><strong>Station Code</strong></label>
+                    <input type="text" class="col-md-6 form-control" ng-model="weather.stationCode" readonly />
+                </div>
+                <div class="col-md-6 form-group">
+                    <label for="cname" class="col-md-6 control-label"><strong>Date</strong></label>
+                    <input type="date" class="col-md-6 form-control" ng-model="weather.date" required />
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="col-md-6 form-group">
+                    <label for="cname" class="col-md-6 control-label"><strong>Predicted Speed (km/h)</strong></label>
+                    <input type="number" class="col-md-6 form-control" ng-change="getVariance()" ng-model="weather.predictedSpeed" required />
+                </div>
+                <div class="col-md-6 form-group">
+                    <label for="cname" class="col-md-6 control-label"><strong>Actual Speed (Km/h)</strong></label>
+                    <input type="number" class="col-md-6 form-control" ng-change="getVariance()" ng-model=" weather.actualSpeed" />
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-6 form-group">
+                    <label for="variance" class="col-md-6 control-label"><strong>Variance</strong></label>
+                    <input type="number" id="txtvariance" class="col-md-6 form-control" ng-model="weather.variance" readonly />
+                </div>
+                <div class="col-md-6 form-group">
+                    <div class="col-md-6">
+                        <input type="submit" value="Save" data-ng-click="save()" data-ng-disabled="!weatherForm.$valid" class="btn btn-primary" />
+                        <input type="submit" value="Cancel" data-ng-click="Cancel()" class="btn btn-primary" />
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+    <div id="mydiv" data-ng-show="loading">
+        <img src="/Images/ajax-loader.gif" class="ajax-loader" />
+    </div>
+</div>

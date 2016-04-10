@@ -1,0 +1,6 @@
+1,Lucknow,1,UP-LKO-1
+2,Kanpur,1,UP-KNP-1
+3,Varanasi,1,UP-VNS-1
+4,Bhopal,3,MP-BHO-1
+
+5,Ahemdabad,6,GUJ-AMBD-1

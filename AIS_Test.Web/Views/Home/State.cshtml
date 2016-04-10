@@ -1,0 +1,68 @@
+﻿
+@{
+    ViewBag.Title = "State";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>State</h2>
+
+<div data-ng-controller="stateController" class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <strong class="error">{{ error }}</strong>
+            <p data-ng-hide="showAdd"><a data-ng-click="toggleAdd()" href="javascript:;" class="btn btn-primary">Add New</a></p>
+            <form name="addstate" data-ng-show="showAdd" style="width:600px;margin:0px auto;">
+                <div class="form-group">
+                    <label for="cname" class="col-sm-2 control-label">Name:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="cname" placeholder="please enter state name" data-ng-model="newState.Name" required />
+                    </div>
+                </div>
+                <br />
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <input type="submit" value="Add" data-ng-click="add()" data-ng-disabled="!addstate.$valid" class="btn btn-primary" />
+                        <input type="button" value="Cancel" data-ng-click="toggleAdd()" class="btn btn-primary" />
+                    </div>
+                </div>
+                <br />
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <br />
+            <br />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover" style="width:800px">
+                    <tr>
+                        <th><strong>Id</strong></th>
+                        <td><strong>Name</strong></td>
+                    </tr>
+                    <tr data-ng-repeat="state in states">
+                        <td><strong data-ng-hide="state.editMode">{{ state.Id }}</strong>
+                            <input data-ng-show="state.editMode" type="text" data-ng-model="state.Id" readonly />
+                        </td>
+                        <td>
+                            <p data-ng-hide="state.editMode">{{ state.Name }}</p>
+                            <input data-ng-show="state.editMode" type="text" data-ng-model="state.Name" />
+                        </td>
+                        <td>
+                            <p data-ng-hide="state.editMode"><a data-ng-click="toggleEdit(state)" href="javascript:;">Edit</a> | <a data-ng-click="deletestate(state)" href="javascript:;">Delete</a></p>
+                            <p data-ng-show="state.editMode"><a data-ng-click="save(state)" href="javascript:;">Save</a> | <a data-ng-click="toggleEdit(state)" href="javascript:;">Cancel</a></p>
+                        </td>
+                    </tr>
+                </table>
+                <hr />
+            </div>
+        </div>
+    </div>
+    <div id="mydiv" data-ng-show="loading">
+        <img src="/Images/ajax-loader.gif" class="ajax-loader" />
+    </div>
+</div>
+
